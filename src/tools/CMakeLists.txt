@@ -54,6 +54,8 @@ target_sources(
           text/textwidget.cpp)
 target_sources(flameshot PRIVATE undo/undotool.h undo/undotool.cpp)
 
+target_sources(flameshot PRIVATE copilot/copilottool.h copilot/copilottool.cpp)
+
 target_sources(
   flameshot
   PRIVATE abstractactiontool.cpp
@@ -65,4 +67,4 @@ target_sources(
           abstractpathtool.h
           abstracttwopointtool.h
           capturetool.h
-          toolfactory.h)
+          toolfactory.h)  

@@ -243,6 +243,16 @@ file(GLOB_RECURSE _source_list LIST_DIRECTORIES false
 #  will be organized according to the actual directory structure, .h.cpp is put together
 source_group(TREE ${_src_root_path} FILES ${_source_list})
 
+# set(ENABLE_OPENSSL TRUE)
+# set(OpenSSL "C:\\Qt\\Qt5.12.12\\5.12.12\\msvc2017\\bin\\")
+# message("ENABLE_OPENSSL ${ENABLE_OPENSSL}")
+# message("${OPENSSL_FOUND}") 
+# message("Open SSL pkg: ${OpenSSL}") 
+
+# set(OPENSSL_ROOT_DIR "C:/Users/feilv/Downloads/openssl-1.0.2p/openssl-1.0.2p")
+# set(OPENSSL_INCLUDE_DIR "C:/Users/feilv/Downloads/openssl-1.0.2p/openssl-1.0.2p/include")
+# set(OPENSSL_LIBRARIES "C:/Users/feilv/Downloads/openssl-1.0.2p/openssl-1.0.2p/out32dll")
+
 if (WIN32)
     set(USE_OPENSSL FALSE)
     if (ENABLE_OPENSSL)

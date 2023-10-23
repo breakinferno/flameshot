@@ -6,6 +6,7 @@
 #include "arrow/arrowtool.h"
 #include "circle/circletool.h"
 #include "circlecount/circlecounttool.h"
+#include "copilot/copilottool.h"
 #include "copy/copytool.h"
 #include "exit/exittool.h"
 #include "imgupload/imguploadertool.h"
@@ -45,6 +46,7 @@ CaptureTool* ToolFactory::CreateTool(CaptureTool::Type t, QObject* parent)
         if_TYPE_return_TOOL(TYPE_CIRCLE, CircleTool);
         if_TYPE_return_TOOL(TYPE_MARKER, MarkerTool);
         if_TYPE_return_TOOL(TYPE_MOVESELECTION, MoveTool);
+        if_TYPE_return_TOOL(TYPE_COPILOT, CopilotTool);
         if_TYPE_return_TOOL(TYPE_UNDO, UndoTool);
         if_TYPE_return_TOOL(TYPE_COPY, CopyTool);
         if_TYPE_return_TOOL(TYPE_SAVE, SaveTool);

@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.13)
 # cmake_policy(SET CMP0076 OLD)
 
 set(FLAMESHOT_VERSION 12.1.0)
+set(CMAKE_PREFIX_PATH "C:\\Qt\\Qt5.12.12\\5.12.12\\msvc2017\\")
+
+set(Qt5_DIR "${CMAKE_PREFIX_PATH}/lib/cmake/Qt5")
+set(Qt5Widgets_DIR "${CMAKE_PREFIX_PATH}/lib/cmake/Qt5Widgets")
+set(Qt5Network_DIR "${CMAKE_PREFIX_PATH}/lib/cmake/Qt5Network")
+set(Qt5LinguistTools_DIR "${CMAKE_PREFIX_PATH}/lib/cmake/Qt5LinguistTools")
 
 # Flameshot-org
 set(GIT_API_URL "https://api.github.com/repos/flameshot-org/flameshot/releases/latest")

@@ -40,6 +40,7 @@
 #include <QScreen>
 #include <QShortcut>
 #include <draggablewidgetmaker.h>
+#include <iostream>
 
 #if !defined(DISABLE_UPDATE_CHECKER)
 #include "src/widgets/updatenotificationwidget.h"
@@ -125,8 +126,13 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
                        Qt::SubWindow // Hides the taskbar icon
         );
 #endif
-
+        auto count = 1;
+        auto cur = 0;
         for (QScreen* const screen : QGuiApplication::screens()) {
+            if (cur == count) {
+                break;
+            }
+            cur++;
             QPoint topLeftScreen = screen->geometry().topLeft();
 
             if (topLeftScreen.x() < topLeft.x()) {
@@ -177,7 +183,13 @@ CaptureWidget::CaptureWidget(const CaptureRequest& req,
         r.moveTo(0, 0);
         areas.append(r);
 #else
+        auto count = 1;
+        auto cur = 0;
         for (QScreen* const screen : QGuiApplication::screens()) {
+            if (cur == count) {
+                break;
+            }
+            cur++;
             QRect r = screen->geometry();
             r.moveTo(r.x() / screen->devicePixelRatio(),
                      r.y() / screen->devicePixelRatio());
@@ -547,15 +559,18 @@ void CaptureWidget::paintEvent(QPaintEvent* paintEvent)
     painter.drawPixmap(0, 0, m_context.screenshot);
     if (m_selection && m_xywhDisplay) {
         const QRect& selection = m_selection->geometry().normalized();
+        // m_context.selection = selection;
         const qreal scale = m_context.screenshot.devicePixelRatio();
         QRect xybox;
         QFontMetrics fm = painter.fontMetrics();
 
-        QString xy = QString("%1x%2+%3+%4")
+        QString xy = QString("%1x%2+%3+%4=>%5+%6")
                        .arg(static_cast<int>(selection.width() * scale))
                        .arg(static_cast<int>(selection.height() * scale))
                        .arg(static_cast<int>(selection.left() * scale))
-                       .arg(static_cast<int>(selection.top() * scale));
+                       .arg(static_cast<int>(selection.top() * scale))
+                       .arg(m_context.screenshot.height())
+                       .arg(m_context.screenshot.width());
 
         xybox = fm.boundingRect(xy);
         // the small numbers here are just margins so the text doesn't
@@ -1296,6 +1311,11 @@ void CaptureWidget::setState(CaptureToolButton* b)
         updateSelectionState();
         updateTool(b->tool());
     }
+
+    // if (b->tool()->needPainter()) {
+    //     QPainter painter;
+    //     b->tool()->paint(painter, this);
+    // }
 }
 
 void CaptureWidget::handleToolSignal(CaptureTool::Request r)

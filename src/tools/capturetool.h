@@ -8,6 +8,7 @@
 #include "src/utils/pathinfo.h"
 #include <QIcon>
 #include <QPainter>
+// #include "capturewidget.h"
 
 class CaptureTool : public QObject
 {
@@ -48,6 +49,7 @@ public:
         TYPE_SIZEDECREASE = 21,
         TYPE_INVERT = 22,
         TYPE_ACCEPT = 23,
+        TYPE_COPILOT = 24,
     };
     Q_ENUM(Type);
 
@@ -151,6 +153,9 @@ public:
     // When the tool is selected, this is called when the mouse moves
     virtual void paintMousePreview(QPainter& painter,
                                    const CaptureContext& context) = 0;
+
+    // virtual bool needPainter() const { return false; };
+    // virtual void paint(QPainter& painter, CaptureWidget& widget){};
 
     // Move tool objects
     virtual void move(const QPoint& pos) { Q_UNUSED(pos) };

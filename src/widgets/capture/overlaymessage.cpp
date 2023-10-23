@@ -15,6 +15,7 @@ OverlayMessage::OverlayMessage(QWidget* parent, const QRect& targetArea)
 {
     // NOTE: do not call the static functions from the constructor
     m_instance = this;
+    m_label = new QLabel(parent);
     m_messageStack.push(QString()); // Default message is empty
     setAttribute(Qt::WA_TransparentForMouseEvents);
     setAttribute(Qt::WA_AlwaysStackOnTop);
@@ -32,6 +33,17 @@ OverlayMessage::OverlayMessage(QWidget* parent, const QRect& targetArea)
       QStringLiteral("QLabel { color: %1; }").arg(m_textColor.name()));
 
     setMargin(QApplication::fontMetrics().height() / 2);
+
+    m_label->setAttribute(Qt::WA_TransparentForMouseEvents);
+    m_label->setAttribute(Qt::WA_AlwaysStackOnTop);
+    m_label->setAlignment(Qt::AlignCenter);
+    m_label->setTextFormat(Qt::RichText);
+
+    m_label->setStyleSheet(
+      QStringLiteral("QLabel { color: %1; }").arg(m_textColor.name()));
+
+    m_label->setMargin(QApplication::fontMetrics().height() / 2);
+
     QWidget::hide();
 }
 
@@ -124,4 +136,19 @@ void OverlayMessage::updateGeometry()
     QLabel::updateGeometry();
 }
 
+void OverlayMessage::updateGeometryBy(const QRect& geo)
+{
+    setGeometry(geo);
+    QLabel::updateGeometry();
+}
+
+void OverlayMessage::forcePushIn(const QString& msg, const QRect& geo)
+{
+    m_label->setText(msg);
+    m_label->setGeometry(geo);
+    m_label->setVisible(true);
+}
+
 OverlayMessage* OverlayMessage::m_instance = nullptr;
+
+QLabel* OverlayMessage::m_label = nullptr;

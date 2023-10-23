@@ -187,7 +187,13 @@ QRect ScreenGrabber::screenGeometry(QScreen* screen)
     if (m_info.waylandDetected()) {
         QPoint topLeft(0, 0);
 #ifdef Q_OS_WIN
+        auto count = 1;
+        auto cur = 0;
         for (QScreen* const screen : QGuiApplication::screens()) {
+            if (cur == count) {
+                break;
+            }
+            cur++;
             QPoint topLeftScreen = screen->geometry().topLeft();
             if (topLeft.x() > topLeftScreen.x() ||
                 topLeft.y() > topLeftScreen.y()) {
@@ -227,8 +233,13 @@ QPixmap ScreenGrabber::grabScreen(QScreen* screen, bool& ok)
 QRect ScreenGrabber::desktopGeometry()
 {
     QRect geometry;
-
+    auto count = 1;
+    auto cur = 0;
     for (QScreen* const screen : QGuiApplication::screens()) {
+        if (cur == count) {
+            break;
+        }
+        cur++;
         QRect scrRect = screen->geometry();
         scrRect.moveTo(scrRect.x() / screen->devicePixelRatio(),
                        scrRect.y() / screen->devicePixelRatio());

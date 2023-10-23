@@ -27,6 +27,17 @@ QRect AbstractActionTool::boundingRect() const
     return {};
 }
 
+// bool AbstractActionTool::needPainter() const
+// {
+//     return false;
+// }
+
+// void AbstractActionTool::paint(QPainter& painter, CaptureWidget& widget)
+// {
+//     Q_UNUSED(painter)
+//     Q_UNUSED(widget)
+// }
+
 void AbstractActionTool::process(QPainter& painter, const QPixmap& pixmap)
 {
     Q_UNUSED(painter)

@@ -30,12 +30,15 @@ public:
 
     static void pushKeyMap(const QList<QPair<QString, QString>>& map);
     static QString compileFromKeyMap(const QList<QPair<QString, QString>>& map);
+    static void forcePushIn(const QString& msg, const QRect& geo);
 
 private:
     QStack<QString> m_messageStack;
     QRect m_targetArea;
     QColor m_fillColor, m_textColor;
+
     static OverlayMessage* m_instance;
+    static QLabel* m_label;
 
     OverlayMessage(QWidget* parent, const QRect& center);
 
@@ -43,4 +46,5 @@ private:
 
     QRect boundingRect() const;
     void updateGeometry();
+    void updateGeometryBy(const QRect& geo);
 };

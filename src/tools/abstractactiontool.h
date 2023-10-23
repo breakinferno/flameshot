@@ -4,6 +4,7 @@
 #pragma once
 
 #include "capturetool.h"
+// #include "capturewidget.h"
 
 class AbstractActionTool : public CaptureTool
 {
@@ -15,6 +16,9 @@ public:
     bool isSelectable() const override;
     bool showMousePreview() const override;
     QRect boundingRect() const override;
+
+    // bool needPainter() const override;
+    // void paint(QPainter& painter, CaptureWidget& widget) override;
 
     void process(QPainter& painter, const QPixmap& pixmap) override;
     void paintMousePreview(QPainter& painter,
